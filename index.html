@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viajar — Agencia de Viajes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+    /* ─── TOKENS ─── */
+    :root {
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+
+      --ink:        #0C0F1A;
+      --ink-mid:    #4A5270;
+      --ink-muted:  #8891AE;
+      --canvas:     #ECEAE4;
+      --white:      #FFFFFF;
+
+      /* Per-division */
+      --est-lo: #3D1500;  --est-hi: #E8924A;
+      --sec-lo: #050E1C;  --sec-hi: #3A8FBA;
+      --op-lo:  #060F0B;  --op-hi:  #2D7259;  --op-gold: #C9A84C;
+      --gf-lo:  #120020;  --gf-hi:  #C040C8;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--canvas);
+      color: var(--ink);
+    }
+
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink);
+      height: 60px;
+      display: flex; align-items: center;
+    }
+    .h-inner {
+      width: 100%; max-width: 1280px;
+      margin: 0 auto; padding: 0 40px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex; align-items: center; gap: 9px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .logo-mark {
+      width: 30px; height: 30px;
+      border: 1.5px solid rgba(255,255,255,.18);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.8); font-size: 14px;
+    }
+    .logo-name {
+      font-family: var(--serif);
+      font-size: 18px; font-weight: 900;
+      color: var(--white); letter-spacing: -.2px;
+    }
+    .logo-name em { font-style: normal; color: #7BC0E8; }
+
+    /* Instagram links */
+    .h-instas {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .h-ig {
+      display: flex; align-items: center; gap: 7px;
+      padding: 8px 18px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: 13px; font-weight: 700;
+      color: var(--white);
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.16);
+      transition: background .15s;
+    }
+    .h-ig:hover {
+      background: rgba(255,255,255,.2);
+    }
+
+    /* WhatsApp button */
+    .h-wa {
+      display: flex; align-items: center; gap: 7px;
+      background: #22C55E; color: var(--white);
+      font-size: 13px; font-weight: 700;
+      padding: 8px 18px; border-radius: 7px;
+      text-decoration: none; flex-shrink: 0;
+      transition: background .15s, box-shadow .15s;
+    }
+    .h-wa:hover { background: #16A34A; box-shadow: 0 4px 16px rgba(34,197,94,.35); }
+
+    @media (max-width: 900px) {
+      .h-ig-label { display: none; }
+      .h-ig { padding: 7px 9px; }
+      .h-inner { padding: 0 20px; gap: 12px; }
+    }
+    @media (max-width: 540px) {
+      .h-instas { display: none; }
+    }
+
+    /* ─── PAGE WRAPPER ─── */
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 16px 20px 48px;
+    }
+
+    /* ─── BENTO GRID ─── */
+    /*
+      Col 1 (wider) : estudiantil spans rows 1+2
+      Col 2 (narrow): secundario row 1, operador row 2
+      Row 3: gofun full-width
+    */
+    .grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      grid-template-rows: 320px 220px 240px;
+      gap: 10px;
+    }
+
+    .card-op  { grid-column: 1; grid-row: 1 / 3; }   /* más grande */
+    .card-sec { grid-column: 2; grid-row: 1; }        /* segundo */
+    .card-est { grid-column: 2; grid-row: 2; }        /* más chico */
+    .card-gf  { grid-column: 1 / -1; grid-row: 3; }
+
+    /* ─── CARD ─── */
+    /*
+      Anatomy (identical in every card):
+        ┌─────────────────────────┐
+        │ [TAG]          ← top-left │
+        │                           │
+        │         [WATERMARK]       │  ← decorative, faint
+        │                           │
+        │ [LOCATION]     ← bottom   │
+        │ [TITLE]                   │
+        │ [DESC?]                   │
+        │ [CTA]                     │
+        └─────────────────────────┘
+    */
+    .card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      /* Lift on hover comes from box-shadow, not transform,
+         so surrounding elements don't shift */
+      transition: box-shadow .3s ease;
+    }
+    .card:hover {
+      box-shadow: 0 24px 56px rgba(0,0,0,.28);
+    }
+    .card:focus-visible {
+      outline: 3px solid #7BC0E8;
+      outline-offset: 3px;
+    }
+
+    /* Background — scales on hover */
+    .card-bg {
+      position: absolute; inset: -6px;
+      transition: transform .55s cubic-bezier(.25,.46,.45,.94);
+    }
+    .card:hover .card-bg { transform: scale(1.05); }
+
+    /* Foto de fondo real — cuando ponés el src, tapa el gradiente */
+    .card-photo {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    /* Si src está vacío, no muestra nada (el gradiente del parent queda visible) */
+    .card-photo[src=""],
+    .card-photo:not([src]) { display: none; }
+
+    /* Noise grain (adds texture, breaks gradient flatness) */
+    .card-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: .05;
+    }
+
+    /* Dark scrim: strong bottom, fades to nothing at top */
+    .card-scrim {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,.82) 0%,
+        rgba(0,0,0,.38) 45%,
+        rgba(0,0,0,.04) 75%,
+        transparent 100%
+      );
+    }
+
+    /* Decorative destination watermark — always bottom-right of bg layer */
+    .card-wm {
+      position: absolute;
+      right: 20px; bottom: -12px;
+      z-index: 2;
+      font-family: var(--serif);
+      font-style: italic; font-weight: 900;
+      font-size: clamp(56px, 8vw, 96px);
+      color: rgba(255,255,255,.07);
+      line-height: 1;
+      white-space: nowrap;
+      pointer-events: none; user-select: none;
+    }
+
+    /* Content — always bottom-left stack, top row with logo+tag */
+    .card-inner {
+      position: absolute; inset: 0; z-index: 3;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+    }
+
+    /* Top row: solo el tag chip */
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    /* Logo — esquina inferior derecha, sobre el contenido */
+    .card-logo {
+      position: absolute;
+      bottom: 24px; right: 24px;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .card-logo img {
+      height: 56px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      object-position: right bottom;
+      border-radius: 8px;
+      filter: drop-shadow(0 3px 10px rgba(0,0,0,.7));
+      display: block;
+    }
+    .card-logo img[src=""],
+    .card-logo img:not([src]) { display: none; }
+
+    /* Tag — top-right */
+    .card-tag {
+      align-self: flex-start;
+      flex-shrink: 0;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1.6px; text-transform: uppercase;
+      color: rgba(255,255,255,.7);
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.16);
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    /* Bottom stack — location → title → desc → cta */
+    .card-foot {
+      display: flex; flex-direction: column;
+      align-items: flex-start; gap: 6px;
+    }
+    .card-loc {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+    }
+    .card-title {
+      font-family: var(--serif);
+      font-weight: 900; line-height: 1.08;
+      letter-spacing: -.3px;
+      color: var(--white);
+    }
+    .card-desc {
+      font-size: 13px; line-height: 1.55;
+      color: rgba(255,255,255,.6);
+      max-width: 380px;
+      margin-top: 2px;
+    }
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 8px;
+      font-size: 12px; font-weight: 700;
+      color: var(--white);
+      background: rgba(255,255,255,.12);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 8px 16px;
+      border-radius: 7px;
+      transition: background .2s, border-color .2s;
+    }
+    .card:hover .card-cta {
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.35);
+    }
+    .card-cta svg { transition: transform .2s; }
+    .card:hover .card-cta svg { transform: translateX(3px); }
+
+    /* ─── PER-CARD BACKGROUNDS ─── */
+    /* Operador — ahora el card más grande (col 1, filas 1-2) */
+    .card-op .card-bg {
+      background:
+        radial-gradient(ellipse 55% 75% at 85% 40%, rgba(201,168,76,.22) 0%, transparent 55%),
+        linear-gradient(150deg, var(--op-lo) 0%, #0E2E22 50%, var(--op-hi) 100%);
+    }
+    .card-op .card-title { font-size: clamp(28px, 3.2vw, 40px); }
+    .card-op .card-tag {
+      color: var(--op-gold);
+      background: rgba(201,168,76,.12);
+      border-color: rgba(201,168,76,.3);
+    }
+
+    /* Secundario — segundo más grande (col 2, fila 1) */
+    .card-sec .card-bg {
+      background:
+        radial-gradient(ellipse 65% 50% at 75% 25%, rgba(58,143,186,.4) 0%, transparent 60%),
+        linear-gradient(155deg, var(--sec-lo) 0%, #0D3D6B 48%, var(--sec-hi) 100%);
+    }
+    .card-sec .card-title { font-size: clamp(22px, 2.4vw, 28px); }
+
+    /* Estudiantil — el más chico (col 2, fila 2) */
+    .card-est .card-bg {
+      background:
+        radial-gradient(ellipse 70% 55% at 25% 65%, rgba(232,146,74,.4) 0%, transparent 60%),
+        linear-gradient(145deg, var(--est-lo) 0%, #7A2E10 45%, var(--est-hi) 100%);
+    }
+    .card-est .card-title { font-size: clamp(20px, 2vw, 24px); }
+
+    .card-gf .card-top { justify-content: flex-end; }
+
+    .card-gf .card-bg {
+      background:
+        radial-gradient(ellipse 45% 110% at 65% 50%, rgba(192,64,200,.35) 0%, transparent 65%),
+        radial-gradient(ellipse 30% 80% at 18% 60%, rgba(107,31,168,.28) 0%, transparent 60%),
+        linear-gradient(120deg, var(--gf-lo) 0%, #3A0A6A 48%, var(--gf-hi) 100%);
+    }
+    /* GoFun: full-width → bigger title, same anatomy */
+    .card-gf .card-title { font-size: clamp(30px, 4.5vw, 52px); }
+    .card-gf .card-wm   { font-size: clamp(80px, 13vw, 130px); bottom: -18px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      padding: 28px 40px;
+    }
+    .f-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .f-brand {
+      font-family: var(--serif);
+      font-size: 18px; font-weight: 700;
+      color: var(--white);
+    }
+    .f-brand em { font-style: normal; color: #7BC0E8; }
+    .f-copy { font-size: 12px; color: rgba(255,255,255,.3); margin-top: 3px; }
+    .f-links { display: flex; gap: 24px; }
+    .f-links a {
+      font-size: 12px; color: rgba(255,255,255,.4);
+      text-decoration: none; transition: color .15s;
+    }
+    .f-links a:hover { color: rgba(255,255,255,.8); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .page { padding: 16px 24px 48px; }
+      footer { padding: 24px; }
+
+      .grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 8px;
+      }
+      .card-est, .card-sec, .card-op, .card-gf {
+        grid-column: 1; grid-row: auto;
+        min-height: 260px;
+      }
+      .card-gf .card-title { font-size: clamp(26px, 7vw, 36px); }
+      .card-wm { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .h-inner { padding: 0 20px; }
+      .page { padding: 0 16px 48px; }
+      footer { padding: 20px 16px; }
+      .f-links { display: none; }
+      .f-inner { flex-direction: column; align-items: flex-start; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="h-inner">
+
+    <a href="index.html" class="logo" aria-label="Viajar — inicio">
+      <div class="logo-mark" aria-hidden="true">✈</div>
+      <span class="logo-name">Via<em>jar</em></span>
+    </a>
+
+    <nav class="h-instas" aria-label="Nuestros Instagrams">
+      <!-- SVG Instagram inline para no depender de iconset externo -->
+      <a href="https://www.instagram.com/viajar.estudiantil/" target="_blank" rel="noopener noreferrer" class="h-ig" aria-label="Instagram Viajar Estudiantil">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+        <span class="h-ig-label">Estudiantil</span>
+      </a>
+      <a href="https://www.instagram.com/viajarsecundario/" target="_blank" rel="noopener noreferrer" class="h-ig" aria-label="Instagram Viajar Secundario">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+        <span class="h-ig-label">Secundario</span>
+      </a>
+      <a href="https://www.instagram.com/viajaroperador/" target="_blank" rel="noopener noreferrer" class="h-ig" aria-label="Instagram Viajar Operador">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+        <span class="h-ig-label">Operador</span>
+      </a>
+      <a href="https://www.instagram.com/gofun.15/" target="_blank" rel="noopener noreferrer" class="h-ig" aria-label="Instagram GoFun15">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+        <span class="h-ig-label">GoFun15</span>
+      </a>
+    </nav>
+
+    <a href="https://wa.me/5493425248008?text=Hola%2C%20quiero%20información%20sobre%20un%20viaje"
+       target="_blank" rel="noopener noreferrer"
+       class="h-wa" aria-label="Consultar por WhatsApp">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.524 5.825L.057 23.856a.5.5 0 00.611.61l6.099-1.456A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.882 9.882 0 01-5.031-1.374l-.36-.214-3.733.892.922-3.642-.235-.374A9.869 9.869 0 012.1 12C2.1 6.527 6.527 2.1 12 2.1c5.474 0 9.9 4.427 9.9 9.9 0 5.474-4.426 9.9-9.9 9.9z"/>
+      </svg>
+      WhatsApp
+    </a>
+
+  </div>
+</header>
+
+<!-- ═══ MAIN ═══ -->
+<div class="page">
+
+  <!-- BENTO GRID -->
+  <div class="grid" role="list" aria-label="Nuestras divisiones">
+
+    <!-- ESTUDIANTIL -->
+    <a href="estudiantil/index.html" class="card card-est" role="listitem"
+       aria-label="Viajar Estudiantil — Carlos Paz, 7mo grado">
+      <div class="card-bg" aria-hidden="true">
+        <img class="card-photo" src="https://i.postimg.cc/g0f2trdz/Save-Clip-App-589161547-18031295492760383-8772723109333919335-n-(1).jpg" alt="">
+      </div>
+      <div class="card-scrim" aria-hidden="true"></div>
+      <span class="card-wm" aria-hidden="true">Córdoba</span>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-tag">Estudiantil · 7mo Grado</span>
+        </div>
+        <div class="card-foot">
+          <span class="card-loc">Carlos Paz, Córdoba</span>
+          <h2 class="card-title">Viajar<br>Estudiantil</h2>
+          <span class="card-cta" aria-hidden="true">
+            Conocé el paquete
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="card-logo" aria-hidden="true">
+        <img src="https://i.postimg.cc/TYtB6zbr/estudiantil.jpg" alt="">
+      </div>
+    </a>
+
+    <!-- SECUNDARIO -->
+    <a href="secundario/index.html" class="card card-sec" role="listitem"
+       aria-label="Viajar Secundario — Bariloche, egresados">
+      <div class="card-bg" aria-hidden="true">
+        <img class="card-photo" src="https://i.postimg.cc/G3SQSQYs/Save-Clip-App-629769732-18384670183156650-6351634199447706044-n-(1).jpg" alt="">
+      </div>
+      <div class="card-scrim" aria-hidden="true"></div>
+      <span class="card-wm" aria-hidden="true">Patagonia</span>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-tag">Secundario · Egresados</span>
+        </div>
+        <div class="card-foot">
+          <span class="card-loc">Bariloche, Patagonia</span>
+          <h2 class="card-title">Viajar<br>Secundario</h2>
+          <span class="card-cta" aria-hidden="true">
+            Planeá el egreso
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="card-logo" aria-hidden="true">
+        <img src="https://i.postimg.cc/76rW9wvP/secundario.jpg" alt="">
+      </div>
+    </a>
+
+    <!-- OPERADOR -->
+    <a href="operador/index.html" class="card card-op" role="listitem"
+       aria-label="Viajar Operador — paquetes all inclusive">
+      <div class="card-bg" aria-hidden="true">
+        <img class="card-photo" src="https://i.postimg.cc/pXkcmZ60/shutterstock-270486656.avif" alt="">
+      </div>
+      <div class="card-scrim" aria-hidden="true"></div>
+      <span class="card-wm" aria-hidden="true">Mundo</span>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-tag">All Inclusive</span>
+        </div>
+        <div class="card-foot">
+          <span class="card-loc">Nacional · Internacional</span>
+          <h2 class="card-title">Viajar<br>Operador</h2>
+          <p class="card-desc">Paquetes all inclusive diseñados para que solo pienses en disfrutar. Destinos nacionales e internacionales a tu medida.</p>
+          <span class="card-cta" aria-hidden="true">
+            Ver destinos
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="card-logo" aria-hidden="true">
+        <img src="https://i.postimg.cc/br3VqnZj/operador.jpg" alt="">
+      </div>
+    </a>
+
+    <!-- GOFUN15 -->
+    <a href="gofun15/index.html" class="card card-gf" role="listitem"
+       aria-label="GoFun15 — Disney World, quinceañeras">
+      <div class="card-bg" aria-hidden="true">
+        <img class="card-photo" src="https://i.postimg.cc/hGxt4ftp/15neras-(1).jpg" alt="">
+      </div>
+      <div class="card-scrim" aria-hidden="true"></div>
+      <span class="card-wm" aria-hidden="true">Disney</span>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-tag">Quinceañeras · Viaje de 15</span>
+        </div>
+        <div class="card-foot">
+          <span class="card-loc">Disney World</span>
+          <h2 class="card-title">GoFun<sup style="font-size:.55em;vertical-align:super;font-weight:900">15</sup></h2>
+          <p class="card-desc">El viaje a Disney que toda quinceañera sueña. Un festejo mágico e inolvidable.</p>
+          <span class="card-cta" aria-hidden="true">
+            Empezá a soñar
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="card-logo" aria-hidden="true">
+        <img src="https://i.postimg.cc/6Qp92bqp/gofun15.jpg" alt="">
+      </div>
+    </a>
+
+  </div><!-- /grid -->
+
+</div><!-- /page -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="f-inner">
+    <div>
+      <p class="f-brand">Via<em>jar</em></p>
+      <p class="f-copy">&copy; 2026 Viajar Agencia de Viajes. Todos los derechos reservados.</p>
+    </div>
+    <nav class="f-links" aria-label="Divisiones">
+      <a href="estudiantil/index.html">Estudiantil</a>
+      <a href="secundario/index.html">Secundario</a>
+      <a href="operador/index.html">Operador</a>
+      <a href="gofun15/index.html">GoFun15</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
