@@ -361,24 +361,40 @@
       .included-visual { aspect-ratio: 16/9; order: -1; }
     }
     @media (max-width: 768px) {
-      .act-block { height: 70vw; min-height: 300px; }
-      .act-content { padding: 28px 24px 32px; }
+      .act-block { height: 75vw; min-height: 280px; }
+      .act-content { padding: 24px 20px 28px; flex-direction: column; align-items: flex-start; gap: 0; }
+      .act-name { font-size: clamp(26px, 7vw, 40px); }
       .act-num-bg { display: none; }
-      .act-cat-divider { padding: 18px 24px; }
-      .poster-content { padding: 40px 20px; }
-      .poster-sep { width: 90%; }
-      .video-section { padding: 56px 24px; }
+      .act-cat-divider { padding: 16px 20px; }
+      .poster-content { padding: 36px 16px; }
+      .poster-sep { width: 92%; }
+      .pn-1 { font-size: clamp(44px, 13vw, 90px); }
+      .pn-2 { font-size: clamp(26px, 8vw, 58px); }
+      .pn-3 { font-size: clamp(16px, 5vw, 36px); }
+      .pn-4 { font-size: clamp(11px, 3.2vw, 20px); letter-spacing: 1px; }
+      .hero-video-wrap { border-radius: 12px; }
     }
     @media (max-width: 700px) {
-      .section { padding: 56px 24px; }
-      .benefits { padding: 40px 24px; }
-      .hero-content { padding: 56px 24px; }
-      .h-inner { padding: 0 20px; }
-      footer { padding: 24px 20px; }
-      .cta-banner { padding: 56px 24px; }
-      .benefits-inner { grid-template-columns: 1fr; gap: 28px; }
+      .section { padding: 48px 20px; }
+      .act-section .section-inner { padding: 0 20px 40px; }
+      .benefits { padding: 36px 20px; }
+      .hero { min-height: 100vh; }
+      .hero-content { padding: 80px 20px 48px; gap: 32px; }
+      .hero-title { font-size: clamp(34px, 9vw, 60px); }
+      .hero-question { font-size: 12px; }
+      .hero-sub { font-size: 14px; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .btn-primary { width: 100%; justify-content: center; padding: 14px 20px; }
+      .btn-ghost { width: 100%; justify-content: center; padding: 13px 20px; }
+      .h-inner { padding: 0 16px; }
+      footer { padding: 20px 16px; }
+      .cta-banner { padding: 48px 20px; }
+      .cta-banner-sub { font-size: 14px; }
+      .benefits-inner { grid-template-columns: 1fr; gap: 24px; }
       .included-list { grid-template-columns: 1fr; }
       .f-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .section-sub { font-size: 14px; margin-bottom: 32px; }
+      .poster-row { gap: 10px; }
     }
   </style>
 </head>
@@ -399,7 +415,7 @@
 
 <!-- ─── HERO ─── -->
 <section class="hero">
-  <img class="hero-photo" src="https://i.postimg.cc/hGxt4ftp/15neras-(1).jpg" alt="GoFun15">
+  <img class="hero-photo" src="https://i.postimg.cc/QxNSgkt9/gofun15-castillo.png" alt="GoFun15">
   <div class="hero-scrim"></div>
   <div class="hero-content">
     <div class="hero-left">
