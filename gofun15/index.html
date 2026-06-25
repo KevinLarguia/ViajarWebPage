@@ -129,11 +129,12 @@
 
     /* Video en el hero */
     .hero-video-wrap {
-      position: relative; width: 100%; padding-top: 56.25%;
-      border-radius: 16px; overflow: hidden;
+      position: relative; width: 100%; max-width: 340px;
+      padding-top: calc(340px * 16/9);
+      border-radius: 20px; overflow: hidden;
       border: 1px solid rgba(192,64,200,.3);
       box-shadow: 0 24px 80px rgba(192,64,200,.25);
-      flex-shrink: 0;
+      flex-shrink: 0; margin: 0 auto;
     }
     .hero-video-wrap iframe {
       position: absolute; inset: 0;
@@ -398,7 +399,7 @@
       .pn-2 { font-size: clamp(26px, 8vw, 58px); }
       .pn-3 { font-size: clamp(16px, 5vw, 36px); }
       .pn-4 { font-size: clamp(11px, 3.2vw, 20px); letter-spacing: 1px; }
-      .hero-video-wrap { border-radius: 12px; }
+      .hero-video-wrap { max-width: 280px; padding-top: calc(280px * 16/9); border-radius: 14px; }
     }
     @media (max-width: 700px) {
       .section { padding: 48px 20px; }
@@ -470,14 +471,12 @@
     </div>
 
     <div class="hero-video-wrap">
-      <!-- REEMPLAZAR el src del iframe con el link de YouTube -->
-      <!-- Ejemplo: src="https://www.youtube.com/embed/VIDEO_ID" -->
-      <div class="video-placeholder">
-        <div class="video-play-btn">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <p class="video-placeholder-text">Video GoFun15 — próximamente</p>
-      </div>
+      <iframe
+        src="https://www.youtube.com/embed/Krx_PWC5GlY?autoplay=0&rel=0&modestbranding=1"
+        title="GoFun15"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
 </section>
