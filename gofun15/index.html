@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GoFun15 — Viaje de 15 a Disney World</title>
+  <title>GoFun15 — Fiesta de 15 + Viaje de Egresados en uno</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -24,6 +24,7 @@
 
     body { font-family: var(--sans); background: var(--canvas); color: var(--ink); }
 
+    /* ─── NAV ─── */
     header {
       position: sticky; top: 0; z-index: 100;
       background: var(--ink); height: 60px; display: flex; align-items: center;
@@ -48,62 +49,75 @@
       text-decoration: none; transition: color .15s;
     }
     .h-back:hover { color: var(--white); }
-    .h-wa {
-      display: flex; align-items: center; gap: 7px;
-      background: #22C55E; color: var(--white);
-      font-size: 13px; font-weight: 700;
-      padding: 8px 18px; border-radius: 7px;
-      text-decoration: none; flex-shrink: 0;
-      transition: background .15s, box-shadow .15s;
-    }
-    .h-wa:hover { background: #16A34A; box-shadow: 0 4px 16px rgba(34,197,94,.35); }
 
+    /* ─── HERO ─── */
     .hero {
       position: relative;
-      height: 88vh; min-height: 520px; max-height: 780px;
-      display: flex; align-items: flex-end; overflow: hidden;
+      min-height: 100vh;
+      display: flex; align-items: center; overflow: hidden;
+      background: var(--purple-dark);
     }
     .hero-photo {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover; object-position: center 30%;
+      opacity: .35;
     }
     .hero-scrim {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(18,0,32,.95) 0%, rgba(18,0,32,.55) 40%, rgba(18,0,32,.1) 75%, transparent 100%);
+      background: linear-gradient(135deg, rgba(18,0,32,.95) 0%, rgba(192,64,200,.15) 60%, rgba(18,0,32,.9) 100%);
     }
     .hero-content {
       position: relative; z-index: 2;
       width: 100%; max-width: 1280px;
-      margin: 0 auto; padding: 0 40px 72px;
+      margin: 0 auto; padding: 80px 40px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
     }
+    .hero-left {}
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--purple); margin-bottom: 16px;
+      color: var(--purple); margin-bottom: 20px;
     }
     .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1.5px; background: var(--purple); }
+    .hero-question {
+      font-family: var(--serif);
+      font-size: clamp(13px, 1.4vw, 18px);
+      font-weight: 700; color: rgba(255,255,255,.45);
+      letter-spacing: .5px; margin-bottom: 16px;
+      text-transform: uppercase;
+    }
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(42px, 6vw, 80px);
-      font-weight: 900; line-height: 1.04;
+      font-size: clamp(42px, 5.5vw, 76px);
+      font-weight: 900; line-height: 1.02;
       color: var(--white); letter-spacing: -.5px;
-      max-width: 760px; margin-bottom: 20px;
+      margin-bottom: 12px;
+    }
+    .hero-title em { font-style: italic; color: var(--purple); }
+    .hero-title .slash {
+      color: rgba(255,255,255,.15); font-style: normal;
+    }
+    .hero-answer {
+      font-size: clamp(15px, 1.6vw, 20px);
+      font-weight: 800; color: var(--purple);
+      letter-spacing: .5px; margin-bottom: 24px;
+      text-transform: uppercase;
     }
     .hero-sub {
-      font-size: clamp(15px, 1.4vw, 18px);
-      color: rgba(255,255,255,.65);
-      max-width: 480px; line-height: 1.6; margin-bottom: 36px;
+      font-size: clamp(14px, 1.2vw, 17px);
+      color: rgba(255,255,255,.55);
+      max-width: 480px; line-height: 1.7; margin-bottom: 40px;
     }
     .hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 9px;
-      background: #22C55E; color: var(--white);
+      background: var(--purple); color: var(--white);
       font-size: 15px; font-weight: 700;
       padding: 14px 28px; border-radius: 9px; text-decoration: none;
       transition: background .15s, box-shadow .15s;
     }
-    .btn-primary:hover { background: #16A34A; box-shadow: 0 6px 24px rgba(34,197,94,.4); }
+    .btn-primary:hover { background: #a030b0; box-shadow: 0 6px 24px rgba(192,64,200,.45); }
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 14px; font-weight: 600; color: rgba(255,255,255,.75);
@@ -113,6 +127,37 @@
     }
     .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,.5); }
 
+    /* Video en el hero */
+    .hero-video-wrap {
+      position: relative; width: 100%; padding-top: 56.25%;
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(192,64,200,.3);
+      box-shadow: 0 24px 80px rgba(192,64,200,.25);
+      flex-shrink: 0;
+    }
+    .hero-video-wrap iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: none;
+    }
+    .video-placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #1a0030, #3A0A6A);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+    }
+    .video-play-btn {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--purple);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 16px rgba(192,64,200,.15);
+    }
+    .video-play-btn svg { margin-left: 4px; }
+    .video-placeholder-text {
+      font-size: 14px; color: rgba(255,255,255,.4);
+      font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    }
+
+    /* ─── BENEFITS STRIP ─── */
     .benefits { background: var(--ink); padding: 48px 40px; }
     .benefits-inner {
       max-width: 1280px; margin: 0 auto;
@@ -127,6 +172,7 @@
     .benefit-title { font-size: 15px; font-weight: 700; color: var(--white); }
     .benefit-desc { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,.45); }
 
+    /* ─── SECTION BASE ─── */
     .section { padding: 80px 40px; }
     .section-inner { max-width: 1280px; margin: 0 auto; }
     .section-label {
@@ -143,46 +189,126 @@
       line-height: 1.6; max-width: 520px; margin-bottom: 48px;
     }
 
-    /* Parks grid */
-    .parks-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .park-card {
-      border-radius: 14px; overflow: hidden; background: var(--white);
-      box-shadow: 0 2px 12px rgba(0,0,0,.07);
-      display: grid; grid-template-columns: 160px 1fr;
-      transition: box-shadow .25s, transform .25s;
+    /* ─── ACT BLOCKS FULL-WIDTH ─── */
+    .act-section { padding: 80px 0 0 !important; }
+    .act-section .section-inner { padding: 0 40px 56px; }
+
+    .act-cat-divider {
+      background: var(--ink); padding: 20px 60px;
+      display: flex; align-items: center; gap: 20px;
     }
-    .park-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.13); transform: translateY(-3px); }
-    .park-img {
-      font-size: 52px;
+    .act-cat-divider.night { background: #06040f; }
+    .act-cat-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,.35); white-space: nowrap;
+    }
+    .act-cat-label.purple { color: var(--purple); }
+    .act-cat-label.gold { color: #C9A84C; }
+    .act-cat-line { flex: 1; height: 1px; background: rgba(255,255,255,.08); }
+
+    .act-block {
+      position: relative; width: 100%;
+      height: 62vh; min-height: 400px;
+      overflow: hidden; display: flex; align-items: flex-end;
+    }
+    .act-block img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      transition: transform .7s ease;
+    }
+    .act-block:hover img { transform: scale(1.04); }
+    .act-scrim {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.45) 40%, rgba(0,0,0,.1) 70%, transparent 100%);
+    }
+    .act-content {
+      position: relative; z-index: 2;
+      padding: 40px 60px 44px; width: 100%;
+      display: flex; align-items: flex-end; justify-content: space-between;
+    }
+    .act-content-left { max-width: 700px; }
+    .act-eyebrow {
+      font-size: 10px; font-weight: 800; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--purple);
+      margin-bottom: 10px; display: block;
+    }
+    .act-eyebrow.gold { color: #C9A84C; }
+    .act-name {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 54px);
+      font-weight: 900; color: #fff;
+      line-height: 1.05; margin-bottom: 16px; letter-spacing: -.5px;
+    }
+    .act-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .act-pill {
+      font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,.75);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .act-pill::before { content: '+'; font-weight: 900; color: var(--purple); }
+    .act-pill.gold::before { color: #C9A84C; }
+    .act-num-bg {
+      font-family: var(--serif); font-size: clamp(80px, 10vw, 140px);
+      font-weight: 900; color: rgba(255,255,255,.05);
+      line-height: 1; user-select: none; flex-shrink: 0;
+    }
+
+    /* ─── POSTER ─── */
+    .poster-block {
+      position: relative; width: 100%; min-height: 80vh;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .poster-block img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      filter: brightness(.18) saturate(1.6) hue-rotate(260deg);
+    }
+    .poster-content {
+      position: relative; z-index: 2;
+      width: 100%; padding: 64px 48px; text-align: center;
+    }
+    .poster-eyebrow {
+      font-size: 10px; font-weight: 800; letter-spacing: 4px;
+      text-transform: uppercase; color: rgba(255,255,255,.35);
+      margin-bottom: 40px; display: block;
+    }
+    .poster-lineup { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .poster-row {
       display: flex; align-items: center; justify-content: center;
-      min-height: 140px;
+      gap: 20px; width: 100%; flex-wrap: wrap;
     }
-    .park-body { padding: 24px; }
-    .park-tag { font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--purple-mid); margin-bottom: 8px; }
-    .park-name { font-family: var(--serif); font-size: 22px; font-weight: 900; margin-bottom: 8px; }
-    .park-desc { font-size: 13px; line-height: 1.6; color: #6B7280; }
-
-    /* Experiencias adicionales */
-    .exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
-    .exp-card {
-      border-radius: 14px; overflow: hidden; background: var(--white);
-      box-shadow: 0 2px 12px rgba(0,0,0,.07);
-      transition: box-shadow .25s, transform .25s;
+    .poster-sep { width: 70%; height: 1px; background: rgba(255,255,255,.1); margin: 14px auto; }
+    .poster-dot { color: rgba(255,255,255,.2); font-size: 14px; }
+    .pn-1 {
+      font-family: var(--serif); font-size: clamp(64px, 11vw, 130px);
+      font-weight: 900; color: #C084FC;
+      letter-spacing: -3px; line-height: .9; text-transform: uppercase;
     }
-    .exp-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.13); transform: translateY(-3px); }
-    .exp-img { height: 140px; font-size: 40px; display: flex; align-items: center; justify-content: center; }
-    .exp-body { padding: 20px; }
-    .exp-name { font-family: var(--serif); font-size: 18px; font-weight: 900; margin-bottom: 6px; }
-    .exp-desc { font-size: 13px; line-height: 1.6; color: #6B7280; }
+    .pn-2 {
+      font-family: var(--serif); font-size: clamp(38px, 6.5vw, 82px);
+      font-weight: 900; color: rgba(192,132,252,.82);
+      letter-spacing: -2px; line-height: .95; text-transform: uppercase;
+    }
+    .pn-3 {
+      font-family: var(--sans); font-size: clamp(22px, 3.8vw, 50px);
+      font-weight: 800; color: rgba(192,132,252,.55);
+      letter-spacing: 1px; line-height: 1; text-transform: uppercase;
+    }
+    .pn-4 {
+      font-family: var(--sans); font-size: clamp(14px, 2.2vw, 28px);
+      font-weight: 700; color: rgba(255,255,255,.32);
+      letter-spacing: 2px; line-height: 1; text-transform: uppercase;
+    }
 
-    /* Incluido */
+    /* ─── INCLUDED ─── */
     .included-bg { background: #F7F6F2; }
     .included-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
     .included-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
     .inc-item {
       display: flex; align-items: flex-start; gap: 12px;
-      background: var(--white); border-radius: 12px; padding: 18px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.06);
+      background: var(--white); border-radius: 12px;
+      padding: 18px; box-shadow: 0 1px 6px rgba(0,0,0,.06);
     }
     .inc-icon {
       font-size: 22px; flex-shrink: 0; width: 40px; height: 40px;
@@ -205,6 +331,7 @@
     .stat-num { font-family: var(--serif); font-size: 36px; font-weight: 900; color: var(--purple); line-height: 1; }
     .stat-label { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 4px; }
 
+    /* ─── CTA BANNER ─── */
     .cta-banner { background: var(--ink); padding: 80px 40px; text-align: center; }
     .cta-banner-inner { max-width: 640px; margin: 0 auto; }
     .cta-banner-title {
@@ -217,6 +344,7 @@
     .cta-banner .btn-primary { font-size: 16px; padding: 16px 36px; }
     .cta-note { margin-top: 16px; font-size: 12px; color: rgba(255,255,255,.3); }
 
+    /* ─── FOOTER ─── */
     footer { background: #080B11; padding: 28px 40px; }
     .f-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
     .f-brand { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--white); }
@@ -225,24 +353,29 @@
     .f-back { font-size: 13px; color: rgba(255,255,255,.35); text-decoration: none; transition: color .15s; }
     .f-back:hover { color: var(--white); }
 
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
-      .parks-grid { grid-template-columns: 1fr; }
-      .park-card { grid-template-columns: 120px 1fr; }
-      .exp-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-content { grid-template-columns: 1fr; gap: 40px; }
       .benefits-inner { grid-template-columns: repeat(2, 1fr); gap: 32px; }
       .included-grid { grid-template-columns: 1fr; }
       .included-visual { aspect-ratio: 16/9; order: -1; }
     }
+    @media (max-width: 768px) {
+      .act-block { height: 70vw; min-height: 300px; }
+      .act-content { padding: 28px 24px 32px; }
+      .act-num-bg { display: none; }
+      .act-cat-divider { padding: 18px 24px; }
+      .poster-content { padding: 40px 20px; }
+      .poster-sep { width: 90%; }
+      .video-section { padding: 56px 24px; }
+    }
     @media (max-width: 700px) {
       .section { padding: 56px 24px; }
       .benefits { padding: 40px 24px; }
-      .hero-content { padding: 0 24px 56px; }
+      .hero-content { padding: 56px 24px; }
       .h-inner { padding: 0 20px; }
       footer { padding: 24px 20px; }
       .cta-banner { padding: 56px 24px; }
-      .park-card { grid-template-columns: 1fr; }
-      .park-img { min-height: 100px; }
-      .exp-grid { grid-template-columns: 1fr; }
       .benefits-inner { grid-template-columns: 1fr; gap: 28px; }
       .included-list { grid-template-columns: 1fr; }
       .f-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -264,118 +397,199 @@
   </div>
 </header>
 
+<!-- ─── HERO ─── -->
 <section class="hero">
-  <img class="hero-photo" src="https://i.postimg.cc/hGxt4ftp/15neras-(1).jpg" alt="Viaje de 15 Disney">
+  <img class="hero-photo" src="https://i.postimg.cc/hGxt4ftp/15neras-(1).jpg" alt="GoFun15">
   <div class="hero-scrim"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Quinceañeras · Viaje de 15</p>
-    <h1 class="hero-title">El viaje de 15 que<br>siempre soñaste.</h1>
-    <p class="hero-sub">Disney World de la mano de tus amigas. Un festejo mágico e inolvidable para celebrar esta etapa tan especial.</p>
-    <div class="hero-ctas">
-      <a href="https://wa.me/5493425248008?text=Hola%2C%20quiero%20información%20sobre%20el%20viaje%20de%2015%20a%20Disney"
-         target="_blank" rel="noopener noreferrer" class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.524 5.825L.057 23.856a.5.5 0 00.611.61l6.099-1.456A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.882 9.882 0 01-5.031-1.374l-.36-.214-3.733.892.922-3.642-.235-.374A9.869 9.869 0 012.1 12C2.1 6.527 6.527 2.1 12 2.1c5.474 0 9.9 4.427 9.9 9.9 0 5.474-4.426 9.9-9.9 9.9z"/></svg>
-        Consultar por WhatsApp
-      </a>
-      <a href="#parques" class="btn-ghost">
-        Ver parques incluidos
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      </a>
+    <div class="hero-left">
+      <p class="hero-eyebrow">GoFun15 · La experiencia completa</p>
+      <p class="hero-question">¿Por qué elegir entre</p>
+      <h1 class="hero-title">
+        Fiesta de 15<br>
+        <span class="slash">—</span><br>
+        <em>o</em> Viaje de Egresados
+      </h1>
+      <p class="hero-answer">Con GoFun15 hacés las dos.</p>
+      <p class="hero-sub">Viajás a Disney World con tus amigas y festejás tus 15 en uno de los mejores salones de Santa Fe. Viaje, fiesta, recuerdos. Todo en uno.</p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/5493425248008?text=Hola%2C%20quiero%20información%20sobre%20GoFun15"
+           target="_blank" rel="noopener noreferrer" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.524 5.825L.057 23.856a.5.5 0 00.611.61l6.099-1.456A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.882 9.882 0 01-5.031-1.374l-.36-.214-3.733.892.922-3.642-.235-.374A9.869 9.869 0 012.1 12C2.1 6.527 6.527 2.1 12 2.1c5.474 0 9.9 4.427 9.9 9.9 0 5.474-4.426 9.9-9.9 9.9z"/></svg>
+          Consultar por WhatsApp
+        </a>
+        <a href="#experiencia" class="btn-ghost">
+          Ver la experiencia
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-video-wrap">
+      <!-- REEMPLAZAR el src del iframe con el link de YouTube -->
+      <!-- Ejemplo: src="https://www.youtube.com/embed/VIDEO_ID" -->
+      <div class="video-placeholder">
+        <div class="video-play-btn">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <p class="video-placeholder-text">Video GoFun15 — próximamente</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ─── BENEFITS ─── -->
 <section class="benefits">
   <div class="benefits-inner">
     <div class="benefit">
       <div class="benefit-icon">✈️</div>
       <p class="benefit-title">Vuelo incluido</p>
-      <p class="benefit-desc">Vuelos de ida y vuelta a Orlando desde Buenos Aires. Equipaje incluido.</p>
+      <p class="benefit-desc">Vuelos de ida y vuelta a Orlando desde Buenos Aires, con equipaje.</p>
     </div>
     <div class="benefit">
       <div class="benefit-icon">🏰</div>
       <p class="benefit-title">Parques Disney</p>
-      <p class="benefit-desc">Acceso a los parques temáticos más importantes de Disney World en Orlando.</p>
-    </div>
-    <div class="benefit">
-      <div class="benefit-icon">🏨</div>
-      <p class="benefit-title">Hotel en Orlando</p>
-      <p class="benefit-desc">Alojamiento a minutos de Disney con desayuno y traslados incluidos.</p>
+      <p class="benefit-desc">Acceso a los 4 parques de Disney World y opcionales en Universal.</p>
     </div>
     <div class="benefit">
       <div class="benefit-icon">👑</div>
-      <p class="benefit-title">Experiencia VIP</p>
-      <p class="benefit-desc">Coordinadora exclusiva para el grupo. Fotos, sorpresas y momentos únicos.</p>
+      <p class="benefit-title">Fiesta de 15 VIP</p>
+      <p class="benefit-desc">Tu fiesta de 15 en uno de los mejores salones de Santa Fe. Sesión de fotos, decoración y la noche más especial.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">📋</div>
+      <p class="benefit-title">Todo coordinado</p>
+      <p class="benefit-desc">Coordinadora exclusiva para el grupo durante todo el viaje.</p>
     </div>
   </div>
 </section>
 
-<section class="section" id="parques">
+<!-- ─── PARQUES ─── -->
+<section class="section act-section" id="parques">
   <div class="section-inner">
-    <p class="section-label">Los parques</p>
-    <h2 class="section-title">La magia de Disney<br>en un solo viaje.</h2>
-    <p class="section-sub">Cuatro parques temáticos, millones de recuerdos. Cada día una aventura diferente.</p>
-    <div class="parks-grid">
-      <div class="park-card">
-        <div class="park-img" style="background: linear-gradient(135deg,#1a0040,#6030c0);">🏰</div>
-        <div class="park-body">
-          <p class="park-tag">Parque icónico</p>
-          <h3 class="park-name">Magic Kingdom</h3>
-          <p class="park-desc">El parque más famoso del mundo. El castillo de Cenicienta, las atracciones clásicas y los desfiles más espectaculares.</p>
-        </div>
-      </div>
-      <div class="park-card">
-        <div class="park-img" style="background: linear-gradient(135deg,#003a1a,#0a8a4a);">🌍</div>
-        <div class="park-body">
-          <p class="park-tag">Cultura del mundo</p>
-          <h3 class="park-name">EPCOT</h3>
-          <p class="park-desc">Un recorrido por las culturas del mundo con gastronomía, espectáculos y atracciones de ciencia y tecnología.</p>
-        </div>
-      </div>
-      <div class="park-card">
-        <div class="park-img" style="background: linear-gradient(135deg,#3a0010,#c01040);">🎬</div>
-        <div class="park-body">
-          <p class="park-tag">Cine y acción</p>
-          <h3 class="park-name">Hollywood Studios</h3>
-          <p class="park-desc">Star Wars, Toy Story, Indiana Jones. El parque del cine y la acción con las mejores atracciones de adrenalina.</p>
-        </div>
-      </div>
-      <div class="park-card">
-        <div class="park-img" style="background: linear-gradient(135deg,#001a3a,#006a8a);">🦁</div>
-        <div class="park-body">
-          <p class="park-tag">Aventura y naturaleza</p>
-          <h3 class="park-name">Animal Kingdom</h3>
-          <p class="park-desc">El parque más grande de Disney. Safaris, animales reales y el mundo de Avatar en una experiencia única.</p>
-        </div>
-      </div>
-    </div>
+    <p class="section-label">Los parques de Disney World</p>
+    <h2 class="section-title">Cuatro parques,<br>millones de recuerdos.</h2>
+    <p class="section-sub">Cada día una aventura diferente. Armamos el itinerario para que no te pierdas nada.</p>
+  </div>
 
-    <div class="exp-grid">
-      <div class="exp-card">
-        <div class="exp-img" style="background: linear-gradient(135deg,#1a0030,#8020c0);">🛍️</div>
-        <div class="exp-body">
-          <h3 class="exp-name">Disney Springs</h3>
-          <p class="exp-desc">Shopping, restaurantes y entretenimiento en el corazón de Disney. La tarde libre perfecta.</p>
+  <div class="act-cat-divider night">
+    <span class="act-cat-label purple">🏰 Disney World · Orlando</span>
+    <div class="act-cat-line"></div>
+    <span class="act-cat-label" style="color:rgba(255,255,255,.2)">4 parques temáticos</span>
+  </div>
+
+  <div class="act-block">
+    <img src="https://images.pexels.com/photos/3041066/pexels-photo-3041066.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Magic Kingdom Disney">
+    <div class="act-scrim"></div>
+    <div class="act-content">
+      <div class="act-content-left">
+        <span class="act-eyebrow">Parque 01</span>
+        <p class="act-name">Magic Kingdom</p>
+        <div class="act-pills">
+          <span class="act-pill">El castillo de Cenicienta</span>
+          <span class="act-pill">Desfiles épicos</span>
+          <span class="act-pill">Fuegos artificiales</span>
         </div>
       </div>
-      <div class="exp-card">
-        <div class="exp-img" style="background: linear-gradient(135deg,#001a40,#0040c0);">🌊</div>
-        <div class="exp-body">
-          <h3 class="exp-name">Universal Studios</h3>
-          <p class="exp-desc">Harry Potter, Jurassic Park y las atracciones más extremas de Orlando. Disponible como opcional.</p>
+      <div class="act-num-bg">01</div>
+    </div>
+  </div>
+
+  <div class="act-block">
+    <img src="https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="EPCOT Disney">
+    <div class="act-scrim"></div>
+    <div class="act-content">
+      <div class="act-content-left">
+        <span class="act-eyebrow">Parque 02</span>
+        <p class="act-name">EPCOT</p>
+        <div class="act-pills">
+          <span class="act-pill">Culturas del mundo</span>
+          <span class="act-pill">Gastronomía global</span>
+          <span class="act-pill">Tecnología y ciencia</span>
         </div>
       </div>
-      <div class="exp-card">
-        <div class="exp-img" style="background: linear-gradient(135deg,#2a001a,#c02080);">📸</div>
-        <div class="exp-body">
-          <h3 class="exp-name">Sesión de fotos</h3>
-          <p class="exp-desc">Sesión fotográfica profesional en los parques para que tengas los mejores recuerdos del viaje.</p>
+      <div class="act-num-bg">02</div>
+    </div>
+  </div>
+
+  <div class="act-block">
+    <img src="https://images.pexels.com/photos/2407777/pexels-photo-2407777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Hollywood Studios">
+    <div class="act-scrim"></div>
+    <div class="act-content">
+      <div class="act-content-left">
+        <span class="act-eyebrow">Parque 03</span>
+        <p class="act-name">Hollywood Studios</p>
+        <div class="act-pills">
+          <span class="act-pill">Star Wars</span>
+          <span class="act-pill">Toy Story</span>
+          <span class="act-pill">Indiana Jones</span>
+        </div>
+      </div>
+      <div class="act-num-bg">03</div>
+    </div>
+  </div>
+
+  <div class="act-block">
+    <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Animal Kingdom Disney">
+    <div class="act-scrim"></div>
+    <div class="act-content">
+      <div class="act-content-left">
+        <span class="act-eyebrow">Parque 04</span>
+        <p class="act-name">Animal Kingdom</p>
+        <div class="act-pills">
+          <span class="act-pill">Safari real</span>
+          <span class="act-pill">Mundo Avatar</span>
+          <span class="act-pill">El parque más grande</span>
+        </div>
+      </div>
+      <div class="act-num-bg">04</div>
+    </div>
+  </div>
+
+  <!-- FIESTA DE 15 -->
+  <div class="act-cat-divider night">
+    <span class="act-cat-label gold">👑 Experiencia Fiesta de 15</span>
+    <div class="act-cat-line"></div>
+    <span class="act-cat-label" style="color:rgba(255,255,255,.2)">La celebración más especial</span>
+  </div>
+
+  <!-- PÓSTER FIESTA 15 -->
+  <div class="poster-block">
+    <img src="https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Fiesta de 15">
+    <div class="poster-content">
+      <span class="poster-eyebrow">La noche más especial de tu vida · Santa Fe</span>
+      <div class="poster-lineup">
+        <div class="poster-row">
+          <span class="pn-1">Gala</span>
+          <span class="pn-1" style="color:rgba(192,132,252,.2)">15</span>
+        </div>
+        <div class="poster-sep"></div>
+        <div class="poster-row">
+          <span class="pn-2">Sesión de fotos</span>
+          <span class="poster-dot">·</span>
+          <span class="pn-2">Cena VIP</span>
+        </div>
+        <div class="poster-sep"></div>
+        <div class="poster-row">
+          <span class="pn-3">Sorpresas</span>
+          <span class="poster-dot">·</span>
+          <span class="pn-3">Coordinadora exclusiva</span>
+        </div>
+        <div class="poster-sep"></div>
+        <div class="poster-row">
+          <span class="pn-4">Decoración personalizada</span>
+          <span class="poster-dot">·</span>
+          <span class="pn-4">Torta de 15</span>
+          <span class="poster-dot">·</span>
+          <span class="pn-4">Recuerdos únicos</span>
         </div>
       </div>
     </div>
   </div>
+
 </section>
 
+<!-- ─── QUÉ INCLUYE ─── -->
 <section class="section included-bg">
   <div class="section-inner">
     <div class="included-grid">
@@ -387,14 +601,14 @@
             <div class="inc-icon">✈️</div>
             <div>
               <p class="inc-title">Vuelo ida y vuelta</p>
-              <p class="inc-desc">Desde Buenos Aires a Orlando con equipaje.</p>
+              <p class="inc-desc">Desde Buenos Aires a Orlando con equipaje incluido.</p>
             </div>
           </div>
           <div class="inc-item">
             <div class="inc-icon">🏨</div>
             <div>
               <p class="inc-title">Hotel en Orlando</p>
-              <p class="inc-desc">Alojamiento con desayuno cerca de Disney.</p>
+              <p class="inc-desc">Alojamiento con desayuno cerca de los parques.</p>
             </div>
           </div>
           <div class="inc-item">
@@ -414,15 +628,15 @@
           <div class="inc-item">
             <div class="inc-icon">👑</div>
             <div>
-              <p class="inc-title">Coordinadora</p>
-              <p class="inc-desc">Acompañamiento exclusivo durante todo el viaje.</p>
+              <p class="inc-title">Experiencia de 15</p>
+              <p class="inc-desc">Fiesta en salón top de Santa Fe con fotos, decoración y coordinadora.</p>
             </div>
           </div>
           <div class="inc-item">
             <div class="inc-icon">💳</div>
             <div>
               <p class="inc-title">Cuotas sin interés</p>
-              <p class="inc-desc">Financiamiento para que ninguna se quede sin ir.</p>
+              <p class="inc-desc">Financiamiento para que todas puedan ir.</p>
             </div>
           </div>
         </div>
@@ -437,11 +651,12 @@
   </div>
 </section>
 
+<!-- ─── CTA ─── -->
 <section class="cta-banner">
   <div class="cta-banner-inner">
     <h2 class="cta-banner-title">Tu viaje de 15<br><em>empieza acá.</em></h2>
     <p class="cta-banner-sub">Escribinos y te armamos una propuesta a medida para vos y tus amigas. Las fechas se reservan rápido.</p>
-    <a href="https://wa.me/5493425248008?text=Hola%2C%20quiero%20información%20sobre%20el%20viaje%20de%2015%20a%20Disney"
+    <a href="https://wa.me/5493425248008?text=Hola%2C%20quiero%20información%20sobre%20GoFun15"
        target="_blank" rel="noopener noreferrer" class="btn-primary">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.524 5.825L.057 23.856a.5.5 0 00.611.61l6.099-1.456A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.882 9.882 0 01-5.031-1.374l-.36-.214-3.733.892.922-3.642-.235-.374A9.869 9.869 0 012.1 12C2.1 6.527 6.527 2.1 12 2.1c5.474 0 9.9 4.427 9.9 9.9 0 5.474-4.426 9.9-9.9 9.9z"/></svg>
       Consultar por WhatsApp
@@ -460,7 +675,7 @@
   </div>
 </footer>
 
-<a href="https://wa.me/5493425248008?text=Hola%2C%20quiero%20información%20sobre%20el%20viaje%20de%2015%20a%20Disney%20World"
+<a href="https://wa.me/5493425248008?text=Hola%2C%20quiero%20información%20sobre%20GoFun15"
    target="_blank" rel="noopener noreferrer"
    class="wa-float" aria-label="Consultar por WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
