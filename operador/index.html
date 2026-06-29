@@ -856,7 +856,7 @@
       <p class="cta-banner-sub">Completá el formulario y recibí promociones, fechas y precios exclusivos directo en tu WhatsApp o mail.</p>
       <p class="cta-note" style="margin-top:20px">Sin spam · Solo ofertas de viaje · Respondemos en menos de 24 hs</p>
     </div>
-    <form class="contact-form" action="mailto:larguiakevin@gmail.com" method="post" enctype="text/plain">
+    <form class="contact-form" id="op-form">
       <div class="form-row">
         <div class="form-field">
           <label for="op-nombre">Nombre</label>
@@ -885,11 +885,42 @@
         <label for="op-msg">¿Cuándo y con quién viajás?</label>
         <textarea id="op-msg" name="mensaje" placeholder="Ej: Viaje en familia en julio, 4 personas, presupuesto moderado..."></textarea>
       </div>
-      <button type="submit" class="form-submit">
+      <button type="submit" class="form-submit" id="op-submit">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
         Quiero recibir promociones
       </button>
     </form>
+    <script>
+      document.getElementById('op-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('op-submit');
+        btn.disabled = true;
+        btn.innerHTML = 'Enviando...';
+        const data = {
+          nombre:   document.getElementById('op-nombre').value,
+          telefono: document.getElementById('op-telefono').value,
+          destino:  document.getElementById('op-destino').value,
+          mensaje:  document.getElementById('op-msg').value
+        };
+        fetch('https://script.google.com/macros/s/AKfycbx_C7ow9NJQoE9Y2cDSZOjVwCyMP3y4EqK-OKlNk-srzLH49KefEPyXSrr7xxscKxN9KQ/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify(data)
+        })
+        .then(() => {
+          btn.innerHTML = '✓ Consulta enviada';
+          document.getElementById('op-form').reset();
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Quiero recibir promociones';
+          }, 3000);
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.innerHTML = 'Error, intentá de nuevo';
+        });
+      });
+    </script>
   </div>
 </section>
 

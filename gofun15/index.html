@@ -385,7 +385,8 @@
       .hero-content { grid-template-columns: 1fr; gap: 40px; }
       .benefits-inner { grid-template-columns: repeat(2, 1fr); gap: 32px; }
       .included-grid { grid-template-columns: 1fr; }
-      .included-visual { aspect-ratio: 16/9; order: -1; }
+      .included-visual { aspect-ratio: 16/9; }
+      #fiesta-video-col { order: -1; }
     }
     @media (max-width: 768px) {
       .act-block { height: 75vw; min-height: 280px; }
@@ -421,6 +422,7 @@
       .form-row { grid-template-columns: 1fr; }
       .benefits-inner { grid-template-columns: 1fr; gap: 24px; }
       .included-list { grid-template-columns: 1fr; }
+      #fiesta-wrap { width: 200px !important; height: 356px !important; }
       .f-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
       .section-sub { font-size: 14px; margin-bottom: 32px; }
       .poster-row { gap: 10px; }
@@ -590,7 +592,7 @@
   </div>
 
   <div class="act-block">
-    <img src="https://images.pexels.com/photos/3041066/pexels-photo-3041066.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Magic Kingdom Disney">
+    <img src="https://cdn-imgix.headout.com/media/images/859158d3-9f6c-42b1-b591-dfd30749a96c-1755937701436-305516.jpg?auto=compress%2Cformat&q=90&crop=faces&fit=crop" alt="Magic Kingdom Disney">
     <div class="act-scrim"></div>
     <div class="act-content">
       <div class="act-content-left">
@@ -607,7 +609,7 @@
   </div>
 
   <div class="act-block">
-    <img src="https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="EPCOT Disney">
+    <img src="https://images.unsplash.com/photo-1667135550738-d6159a4b402a?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="EPCOT Disney">
     <div class="act-scrim"></div>
     <div class="act-content">
       <div class="act-content-left">
@@ -624,7 +626,7 @@
   </div>
 
   <div class="act-block">
-    <img src="https://images.pexels.com/photos/2407777/pexels-photo-2407777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Hollywood Studios">
+    <img src="https://www.fodors.com/assets/destinations/75180/sorcerers-hat-disneys-hollywood-studios-walt-disney-world-orlando-florida-usa.jpg" alt="Hollywood Studios">
     <div class="act-scrim"></div>
     <div class="act-content">
       <div class="act-content-left">
@@ -641,7 +643,7 @@
   </div>
 
   <div class="act-block">
-    <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Animal Kingdom Disney">
+    <img src="https://www.travelandleisure.com/thmb/zADGNeMDU2pGdedcjNTR0eOJPhQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/animal-kingdom-mount-everest-AKWDWGUIDE0219-7b9d5cfd24aa40789521844d5337c4ef.jpg" alt="Animal Kingdom Disney">
     <div class="act-scrim"></div>
     <div class="act-content">
       <div class="act-content-left">
@@ -657,46 +659,6 @@
     </div>
   </div>
 
-  <!-- FIESTA DE 15 -->
-  <div class="act-cat-divider night">
-    <span class="act-cat-label gold">👑 Experiencia Fiesta de 15</span>
-    <div class="act-cat-line"></div>
-    <span class="act-cat-label" style="color:rgba(255,255,255,.2)">La celebración más especial</span>
-  </div>
-
-  <!-- PÓSTER FIESTA 15 -->
-  <div class="poster-block">
-    <img src="https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Fiesta de 15">
-    <div class="poster-content">
-      <span class="poster-eyebrow">La noche más especial de tu vida · Santa Fe</span>
-      <div class="poster-lineup">
-        <div class="poster-row">
-          <span class="pn-1">Gala</span>
-          <span class="pn-1" style="color:rgba(192,132,252,.2)">15</span>
-        </div>
-        <div class="poster-sep"></div>
-        <div class="poster-row">
-          <span class="pn-2">Sesión de fotos</span>
-          <span class="poster-dot">·</span>
-          <span class="pn-2">Cena VIP</span>
-        </div>
-        <div class="poster-sep"></div>
-        <div class="poster-row">
-          <span class="pn-3">Sorpresas</span>
-          <span class="poster-dot">·</span>
-          <span class="pn-3">Coordinadora exclusiva</span>
-        </div>
-        <div class="poster-sep"></div>
-        <div class="poster-row">
-          <span class="pn-4">Decoración personalizada</span>
-          <span class="poster-dot">·</span>
-          <span class="pn-4">Torta de 15</span>
-          <span class="poster-dot">·</span>
-          <span class="pn-4">Recuerdos únicos</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </section>
 
@@ -705,58 +667,86 @@
   <div class="section-inner">
     <div class="included-grid">
       <div>
-        <p class="section-label">Qué incluye el paquete</p>
+        <p class="section-label">Tu fiesta de 15 en Santa Fe</p>
         <h2 class="section-title">Todo armado para<br>que solo disfrutes.</h2>
         <div class="included-list">
           <div class="inc-item">
-            <div class="inc-icon">✈️</div>
+            <div class="inc-icon">🏛️</div>
             <div>
-              <p class="inc-title">Vuelo ida y vuelta</p>
-              <p class="inc-desc">Desde Buenos Aires a Orlando con equipaje incluido.</p>
+              <p class="inc-title">Salón VIP</p>
+              <p class="inc-desc">Uno de los mejores salones de Santa Fe, decorado especialmente para vos.</p>
             </div>
           </div>
           <div class="inc-item">
-            <div class="inc-icon">🏨</div>
+            <div class="inc-icon">💐</div>
             <div>
-              <p class="inc-title">Hotel en Orlando</p>
-              <p class="inc-desc">Alojamiento con desayuno cerca de los parques.</p>
+              <p class="inc-title">Decoración personalizada</p>
+              <p class="inc-desc">Flores, centros de mesa, iluminación y ambientación a tu estilo.</p>
             </div>
           </div>
           <div class="inc-item">
-            <div class="inc-icon">🎟️</div>
+            <div class="inc-icon">📸</div>
             <div>
-              <p class="inc-title">Tickets Disney</p>
-              <p class="inc-desc">Acceso a los 4 parques de Disney World.</p>
+              <p class="inc-title">Sesión de fotos y video</p>
+              <p class="inc-desc">Fotógrafo y camarógrafo profesional para inmortalizar cada momento.</p>
             </div>
           </div>
           <div class="inc-item">
-            <div class="inc-icon">🚌</div>
+            <div class="inc-icon">🎵</div>
             <div>
-              <p class="inc-title">Traslados</p>
-              <p class="inc-desc">Aeropuerto, hotel y parques incluidos.</p>
-            </div>
-          </div>
-          <div class="inc-item">
-            <div class="inc-icon">👑</div>
-            <div>
-              <p class="inc-title">Experiencia de 15</p>
-              <p class="inc-desc">Fiesta en salón top de Santa Fe con fotos, decoración y coordinadora.</p>
-            </div>
-          </div>
-          <div class="inc-item">
-            <div class="inc-icon">💳</div>
-            <div>
-              <p class="inc-title">Cuotas sin interés</p>
-              <p class="inc-desc">Financiamiento para que todas puedan ir.</p>
+              <p class="inc-title">DJ y pista de baile</p>
+              <p class="inc-desc">DJ en vivo con la música que más te gusta y pista lista para bailar toda la noche.</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="included-visual" style="background: linear-gradient(150deg, #120020, #3A0A6A, #C040C8);">
-        <div class="included-stat">
-          <p class="stat-num">✨ 15</p>
-          <p class="stat-label">años de magia y recuerdos</p>
+      <div id="fiesta-video-col" style="display:flex; justify-content:center; align-items:center;">
+      <div class="included-visual" style="background:#120020; position:relative; overflow:hidden; border-radius:16px; width:260px; height:462px; flex-shrink:0; cursor:pointer;" onclick="toggleFiestaVideo()" id="fiesta-wrap">
+        <video
+          id="fiesta-video"
+          src="./fiesta.mp4"
+          playsinline
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        </video>
+        <div class="gv-overlay" id="fiesta-overlay">
+          <div class="gv-play-btn">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><polygon points="9,6 9,18 18,12"/></svg>
+          </div>
+          <p class="gv-label">Ver la fiesta</p>
         </div>
+        <button class="gv-mute" id="fiesta-mute" onclick="event.stopPropagation(); toggleFiestaMute()" aria-label="Mute" style="display:none">
+          <svg id="fv-sound" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+          <svg id="fv-muted" width="16" height="16" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+        </button>
+        <script>
+          const fvid = document.getElementById('fiesta-video');
+          const fovl = document.getElementById('fiesta-overlay');
+          const fmute = document.getElementById('fiesta-mute');
+          function toggleFiestaVideo() {
+            if (fvid.paused) {
+              fvid.play();
+              fovl.style.opacity = '0';
+              fovl.style.pointerEvents = 'none';
+              fmute.style.display = 'flex';
+            } else {
+              fvid.pause();
+              fovl.style.opacity = '1';
+              fovl.style.pointerEvents = 'auto';
+              fmute.style.display = 'none';
+            }
+          }
+          function toggleFiestaMute() {
+            fvid.muted = !fvid.muted;
+            document.getElementById('fv-sound').style.display = fvid.muted ? 'none' : 'block';
+            document.getElementById('fv-muted').style.display = fvid.muted ? 'block' : 'none';
+          }
+          fvid.addEventListener('ended', () => {
+            fovl.style.opacity = '1';
+            fovl.style.pointerEvents = 'auto';
+            fmute.style.display = 'none';
+          });
+        </script>
+      </div>
       </div>
     </div>
   </div>
@@ -770,7 +760,7 @@
       <p class="cta-banner-sub">Completá el formulario y te armamos una propuesta a medida para vos y tus amigas. Las fechas se reservan rápido.</p>
       <p class="cta-note" style="margin-top:20px">Respondemos en menos de 24 horas · Sin compromiso</p>
     </div>
-    <form class="contact-form" action="mailto:larguiakevin@gmail.com" method="post" enctype="text/plain">
+    <form class="contact-form" id="gf-form">
       <div class="form-row">
         <div class="form-field">
           <label for="gf-nombre">Nombre</label>
@@ -799,11 +789,43 @@
         <label for="gf-msg">Mensaje (opcional)</label>
         <textarea id="gf-msg" name="mensaje" placeholder="Contanos más sobre lo que imaginás para tu fiesta..."></textarea>
       </div>
-      <button type="submit" class="form-submit">
+      <button type="submit" class="form-submit" id="gf-submit">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
         Enviar consulta
       </button>
     </form>
+    <script>
+      document.getElementById('gf-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('gf-submit');
+        btn.disabled = true;
+        btn.innerHTML = 'Enviando...';
+        const data = {
+          nombre:   document.getElementById('gf-nombre').value,
+          telefono: document.getElementById('gf-telefono').value,
+          fecha:    document.getElementById('gf-fecha').value,
+          cantidad: document.getElementById('gf-cant').value,
+          mensaje:  document.getElementById('gf-msg').value
+        };
+        fetch('https://script.google.com/macros/s/AKfycbw2oIhFk0tUy5giFPWLQppVi0vz-drePcLYECcKzGVyFuT4Zw_V4K-1IreKo_CFufhc8Q/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify(data)
+        })
+        .then(() => {
+          btn.innerHTML = '✓ Consulta enviada';
+          document.getElementById('gf-form').reset();
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Enviar consulta';
+          }, 3000);
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.innerHTML = 'Error, intentá de nuevo';
+        });
+      });
+    </script>
   </div>
 </section>
 
